@@ -1,0 +1,113 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Nutrient - Enter basic information</title>
+    <link rel="stylesheet" href="../bootstrap.min.css">
+    <style>
+        a:link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .line-height {
+            line-height: 1.5;
+        }
+
+        input[type="range"] {
+            width: 400px;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .parent {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="center">
+            <center>
+                <label for="activityLevel" class="form-label">Please slide into your usual activity level</label><br>
+                <input type="range" class="form-range" min="0" max="3" id="activityLevel" oninput="change()">
+                <div id="notes"></div> <br>
+                <button class="btn btn-primary" onclick="storeData()">Continue</button>
+            </center>
+        </div>
+    </div>
+
+    <script>
+        function change() {
+            let activity = document.getElementById("activityLevel").value
+            let notes = document.getElementById("notes")
+            if (activity == 0) {
+                notes.innerHTML = "Sedentary - No moderate or vigorous activities, under 30 minutes per day of intentional exercise"
+            } else if (activity == 1) {
+                notes.innerHTML = "Low active - Daily exercise equal to walking for 30 minutes at 6.4kph"
+            } else if (activity == 2) {
+                notes.innerHTML = "Active - Daily exercise equal to walking 1 hour 45 minutes at 6.4kph"
+            } else if (activity == 3) {
+                notes.innerHTML = "Very Active - Daily exercise equal to walking 4 hours 15 minutes at 6.4kph"
+            }
+        }
+
+        function storeData() {
+            let activity = document.getElementById("activityLevel").value
+            let weight = localStorage.getItem("weight")
+            let height = localStorage.getItem("height")
+            let age = localStorage.getItem("age")
+            let gender = localStorage.getItem("gender")
+            let bmr, tdee, calorieIntakeLimit
+
+            if (gender == 0) {
+                bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+            } else {
+                bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
+            }
+
+            if (activity == 0) {
+                tdee = bmr * 1.2
+            } else if (activity == 1){
+                tdee = bmr * 1.375
+            } else if (activity == 2){
+                tdee = bmr * 1.55
+            } else if (activity == 3){
+                tdee = bmr * 1.725
+            }
+
+            calorieIntakeLimit = Math.round(tdee - 500)
+
+            localStorage.setItem("calorieIntake", calorieIntakeLimit)
+
+            location.href = "../menu/menu.html"
+        }
+    </script>
+</body>
+
+</html>
