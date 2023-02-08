@@ -89,6 +89,13 @@
 
         <!-- Script -->
         <script>
+            var test = localStorage.getItem("target")
+            if(!test){
+                console.log("User ini login untuk pertama kalinya")
+            } else {
+                location.href = "../menu/menu.html"
+            }
+
             var error = "Jangan lupa untuk memasukkan "
             var isFirst = true
 
