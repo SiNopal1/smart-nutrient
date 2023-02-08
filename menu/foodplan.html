@@ -1,0 +1,168 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Nutrient</title>
+    <link rel="stylesheet" href="../bootstrap.min.css">
+    <style>
+        a:link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        html {
+            padding: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <button class="btn btn-danger" onclick="startCalculate()">Restart</button>
+        <button class="btn btn-primary" onclick="backtomenu()">Back to menu</button>
+        <br>
+        <br>
+        <div id="container">
+            <h2>Breakfast</h2>
+            <ul class="list-group" id="tipe1">
+            </ul>
+            <br>
+            <h2>Lunch</h2>
+            <ul class="list-group" id="tipe2">
+            </ul>
+            <br>
+            <h2>Dinner</h2>
+            <ul class="list-group" id="tipe3">
+            </ul>
+        </div>
+        <div id="foodPlan"></div>
+        <script src="databasemealplan.js"></script>
+        <script>
+            function backtomenu () {
+                location.href = "menu.html"
+            }
+            function startCalculate() {
+                document.getElementById("tipe1").innerHTML = ""
+                document.getElementById("tipe2").innerHTML = ""
+                document.getElementById("tipe3").innerHTML = ""
+                //calculate the total kalori
+                let totalCal = 0;
+
+                // Take
+                let calorieIntake = localStorage.getItem("calorieIntake")
+
+                //generate breakfast
+                let breakfast = [];
+                while (totalCal < calorieIntake / 3) {
+                    let randomIndex = Math.floor(Math.random() * Math.floor(5));
+                    if (randomIndex == 0) {
+                        breakfast.push(karbohidrat[Math.floor(Math.random() * Math.floor(7))]);
+                    } else if (randomIndex == 1) {
+                        breakfast.push(protein[Math.floor(Math.random() * Math.floor(8))]);
+                    } else if (randomIndex == 2) {
+                        breakfast.push(lemak[Math.floor(Math.random() * Math.floor(8))]);
+                    } else if (randomIndex == 3) {
+                        breakfast.push(buah[Math.floor(Math.random() * Math.floor(10))]);
+                    } else {
+                        breakfast.push(sayur[Math.floor(Math.random() * Math.floor(12))]);
+                    }
+                    totalCal += breakfast[breakfast.length - 1].kalori;
+                }
+
+                //Generate lunch
+                let lunch = [];
+                totalCal = 0;
+                while (totalCal < calorieIntake / 3) {
+                    let randomIndex = Math.floor(Math.random() * Math.floor(5));
+                    if (randomIndex == 0) {
+                        lunch.push(karbohidrat[Math.floor(Math.random() * Math.floor(7))]);
+                    } else if (randomIndex == 1) {
+                        lunch.push(protein[Math.floor(Math.random() * Math.floor(8))]);
+                    } else if (randomIndex == 2) {
+                        lunch.push(lemak[Math.floor(Math.random() * Math.floor(8))]);
+                    } else if (randomIndex == 3) {
+                        lunch.push(buah[Math.floor(Math.random() * Math.floor(10))]);
+                    } else {
+                        lunch.push(sayur[Math.floor(Math.random() * Math.floor(12))]);
+                    }
+                    totalCal += lunch[lunch.length - 1].kalori;
+                }
+
+                //Generate dinner
+                let dinner = [];
+                totalCal = 0;
+                while (totalCal < calorieIntake / 3) {
+                    let randomIndex = Math.floor(Math.random() * Math.floor(5));
+                    if (randomIndex == 0) {
+                        dinner.push(karbohidrat[Math.floor(Math.random() * Math.floor(7))]);
+                    } else if (randomIndex == 1) {
+                        dinner.push(protein[Math.floor(Math.random() * Math.floor(8))]);
+                    } else if (randomIndex == 2) {
+                        dinner.push(lemak[Math.floor(Math.random() * Math.floor(8))]);
+                    } else if (randomIndex == 3) {
+                        dinner.push(buah[Math.floor(Math.random() * Math.floor(10))]);
+                    } else {
+                        dinner.push(sayur[Math.floor(Math.random() * Math.floor(12))]);
+                    }
+                    totalCal += dinner[dinner.length - 1].kalori;
+                }
+
+                console.log("Breakfast:\n", breakfast);
+                console.log("Lunch:\n", lunch);
+                console.log("Dinner:\n", dinner);
+
+                breakfast.forEach(function (element, index) {
+                    tipe1.innerHTML += `
+  <li class="list-group-item list-group-item-info">
+  <div style="display: flex; justify-content: space-between;">
+  <p>${breakfast[index]["makanan"]} (${breakfast[index].kalori} kalori, ${breakfast[index].Berat})</p>
+  </div>
+  </li>`;
+                });
+
+                lunch.forEach(function (element, index) {
+                    tipe2.innerHTML += `
+  <li class="list-group-item list-group-item-info">
+  <div style="display: flex; justify-content: space-between;">
+  <p>${lunch[index]["makanan"]} (${lunch[index].kalori} kalori, ${lunch[index].Berat})</p>
+  </div>
+  </li>`;
+                });
+
+                dinner.forEach(function (element, index) {
+                    tipe3.innerHTML += `
+  <li class="list-group-item list-group-item-info">
+  <div style="display: flex; justify-content: space-between;">
+  <p>${dinner[index]["makanan"]} (${dinner[index].kalori} kalori, ${dinner[index].Berat})</p>
+  </div>
+  </li>`;
+                });
+
+            }
+
+            startCalculate()
+        </script>
+    </center>
+
+
+
+</body>
+
+</html>

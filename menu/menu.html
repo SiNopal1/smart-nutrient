@@ -152,10 +152,20 @@
             window.location.reload();
         }
 
+        function mealplan() {
+            location.href = "foodplan.html"
+        }
+
+        function backtomainmenu(){
+            location.href = "../index.html"
+        }
+
         addfood();
     </script>
     <br>
-    <button onclick="empty()">Kosongkan Makanan</button>
+    <button onclick="backtomainmenu()" class="btn btn-primary">Back to main menu</button>
+    <button onclick="empty()" class="btn btn-danger">Empty Food</button>
+    <button onclick="mealplan()" class="btn btn-primary">Meal-Plan</button>
 </body>
 
 </html>
