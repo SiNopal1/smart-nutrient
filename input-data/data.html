@@ -60,19 +60,19 @@
         <!-- Weight -->
         <div class="form-floating m-3">
             <input type="text" class="form-control" id="beratBadan" placeholder="Berat Badan">
-            <label for="beratBadan">Weight</label>
+            <label for="beratBadan">Weight (kg)</label>
         </div>
 
         <!-- Height -->
         <div class="form-floating m-3">
             <input type="text" class="form-control" id="tinggiBadan" placeholder="Tinggi Badan">
-            <label for="tinggiBadan">Height</label>
+            <label for="tinggiBadan">Height (cm)</label>
         </div>
 
         <!-- Age -->
         <div class="form-floating m-3">
             <input type="text" class="form-control" id="usia" placeholder="Usia">
-            <label for="usia">Age</label>
+            <label for="usia">Age (years)</label>
         </div>
 
         <!-- Jenis kelamin -->
@@ -96,7 +96,7 @@
                 location.href = "../menu/menu.html"
             }
 
-            var error = "Jangan lupa untuk memasukkan "
+            var error = "Don't forget to input "
             var isFirst = true
 
             function storeData(){
@@ -114,31 +114,31 @@
 
                 if(!weight || !height || !age || !gender){
                     if(!weight){
-                        error += "berat badan"
+                        error += "weight"
                         isFirst = false
                     }
                     if(!height){
                         if(isFirst){
-                            error += "berat badan"
+                            error += "weight"
                             isFirst = false
                         } else {
-                            error += ", berat badan"
+                            error += ", weight"
                         }
                     }
                     if(!age){
                         if(isFirst){
-                            error += "usia"
+                            error += "age"
                             isFirst = false
                         } else {
-                            error += ", usia"
+                            error += ", age"
                         }
                     }
                     if(!gender){
                         if(isFirst){
-                            error += "jenis kelamin"
+                            error += "gender"
                             isFirst = false
                         } else {
-                            error += ", jenis kelamin"
+                            error += ", gender"
                         }
                     }
                     alert(error)
